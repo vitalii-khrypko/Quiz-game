@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  <script>
+    alert("Вас вітає інтелектуальна гра: Як стати мільйонером?\r\nВаша задача - дати правильну відповідь на 5 питань. У випадку допущення помилки ви автоматично покидаєте гру.\r\nВідповідайте лише буквами а, б, в або г.\r\nХай щастить!");
+
+    let correctAnswers = ["в", "г", "б", "в", "г"];
+    let winnings = ["500 грн", "1000 грн", "3000 грн", "4000 грн", "5000 грн"];
+
+    function showQuestion(question, option1, option2, option3, option4, correctAnswer, win) {
+        return {
+            question,
+            option1,
+            option2,
+            option3,
+            option4,
+            correctAnswer,
+            win,
+            answer: "",
+            showPrompt: function() {
+                let message = `${this.question}\n${this.option1},\n${this.option2},\n${this.option3},\n${this.option4}`;
+                let result = prompt(message);
+                this.answer = result.toLowerCase();
+                if (this.answer === this.correctAnswer) {
+                    let continueGame = confirm("Чи бажаєте продовжити гру?");
+                    if (continueGame) {
+                        alert("Наступне питання");
+                    } else {
+                        alert(`Ваш виграш склав ${this.win}. До нових зустрічей!`);
+                        return false;
+                    }
+                } else {
+                    alert("На жаль, відповідь не правильна. Ви вибуваєте з гри.");
+                    return false;
+                }
+                return true;
+            }
+        }
+    }
+
+    let questions = [
+        showQuestion("1. Яка річка є найдовшою у США?", "а) Колорадо", "б) Міссісіпі", "в) Міссурі", "г) Огайо", correctAnswers[0], winnings[0]),
+        showQuestion("2. Яке місто є столицею штату Каліфорнія?", "а) Лос-Анджелес", "б) Сан-Франциско", "в) Сан-Дієго", "г) Сакраменто", correctAnswers[1], winnings[1]),
+        showQuestion("3. Яка з цих гір є найвищою в США?", "а) Маунт-Вітні", "б) Маунт-Маккінлі (Деналі)", "в) Маунт-Рейнір", "г) Маунт-Худ", correctAnswers[2], winnings[2]),
+        showQuestion("4. Який штат США є найбільшим за площею?", "а) Техас", "б) Каліфорнія", "в) Аляска", "г) Монтана", correctAnswers[3], winnings[3]),
+        showQuestion("5. Який океан омиває східне узбережжя США?", "а) Тихий океан", "б) Індійський океан", "в) Північний Льодовитий океан", "г) Атлантичний океан", correctAnswers[4], winnings[4])
+    ];
+
+    for (let i = 0; i < questions.length; i++) {
+        if (!questions[i].showPrompt()) {
+            break;
+        }
+    }
+  </script>
+</body>
+</html>
